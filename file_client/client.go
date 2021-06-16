@@ -1,4 +1,4 @@
-package main
+package fileclient
 
 import (
 	"bufio"
@@ -22,22 +22,21 @@ var (
 
 func main() {
 
-		fmt.Println("Hello i am file stream client")
-		cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	fmt.Println("Hello i am file stream client")
+	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
-		if err != nil {
-			log.Fatalf("could not found connect %v ", err)
-		}
+	if err != nil {
+		log.Fatalf("could not found connect %v ", err)
+	}
 
-		defer cc.Close()
+	defer cc.Close()
 
-		c = filepb.NewFileServiceClient(cc)
+	c = filepb.NewFileServiceClient(cc)
 
-		// UploadFile(c, "bini", "C:/Users/Liben/Desktop/Liben.jpg")
-		// DownloadFile(c, "Liben.jpg")
-		fileNames := []string{"sdf", "asdf"}
-		RegisterPeers(c, "as", 253, fileNames)
-	
+	// UploadFile(c, "bini", "C:/Users/Liben/Desktop/Liben.jpg")
+	// DownloadFile(c, "Liben.jpg")
+	fileNames := []string{"sdf", "asdf"}
+	RegisterPeers(c, "as", 253, fileNames)
 }
 
 func UploadFile(c filepb.FileServiceClient, fileID string, filepath string) {
