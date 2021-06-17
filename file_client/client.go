@@ -20,6 +20,18 @@ var (
 	c filepb.FileServiceClient
 )
 
+func Connect() *grpc.ClientConn {
+	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+
+	if err != nil {
+		log.Fatalf("could not found connect %v ", err)
+	}
+
+	defer cc.Close()
+
+	return cc
+}
+
 func main() {
 
 	fmt.Println("Hello i am file stream client")
